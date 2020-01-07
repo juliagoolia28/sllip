@@ -1,19 +1,28 @@
 # SLLIP MRI Analysis Pipeline
 
+Don't forget to work in the correct environment:
+```
+sllip_env
+```
 ## Organization of Data (and rsyncing)
 -  DICOM files are located at home/nas/dcmstorage/ and need to be rsynced to home/qigroup/Documents/projects/sllip/dicom_conversion/dicoms/ 
+-  **DCM_SUBJECTID in all caps should be edited to reflect subject name in dcmstorage folder. SUBJECTID in all caps should be edited to reflect the name for the subject:**
 ```
-rsync -chavzP --stats /home/nas/dcmstorage/ /home/qigroup/Documents/projects/sllip/dicom_conversion/dicoms
+rsync -chavzP --stats /home/nas/dcmstorage/DCM_SUBJECTID/ /home/qigroup/Documents/projects/sllip/dicom_conversion/dicoms/SUBJECTID
 ```
+For example: ```rsync -chavzP --stats /home/nas/dcmstorage/SLLIP_001_SLLIP_001/ /home/qigroup/Documents/projects/sllip/dicom_conversion/dicoms/sllip_001```
+
 AND to home/nas/projects/sllip/data/mri/dicoms/
 ```
-rsync -chavzP --stats /home/nas/dcmstorage/ /home/nas/projects/sllip/data/mri/dicoms
+rsync -chavzP --stats /home/nas/dcmstorage/DCM_SUBJECTID/ /home/nas/projects/sllip/data/mri/dicoms/SUBJECTID
 ```
--  BIDS files are located at home/qigroup/Documents/projects/sllip/dicom_conversion/bids/ and will be rsynced LATER to home/nas/projects/sllip/data/mri/bids/
+For example: ```rsync -chavzP --stats /home/nas/dcmstorage/SLLIP_001_SLLIP_001/ /home/nas/projects/sllip/data/mri/dicoms/sllip_001```
+
+-  BIDS files are located at home/qigroup/Documents/projects/sllip/dicom_conversion/bids/ and will be rsynced **LATER** to home/nas/projects/sllip/data/mri/bids/
 ```
 rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/dicom_conversion/bids/ /home/nas/projects/sllip/data/mri/bids
 ```
--  Derivatives (fmriprep, fsl, freesurfer) are located at home/qigroup/Documents/projects/sllip/derivatives/ and will be rsynced LATER to home/nas/projects/sllip/data/mri/derivatives/
+-  Derivatives (fmriprep, fsl, freesurfer) are located at home/qigroup/Documents/projects/sllip/derivatives/ and will be rsynced **LATER** to home/nas/projects/sllip/data/mri/derivatives/
 ```
 rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/derivatives/ /home/nas/projects/sllip/data/mri/derivatives
 ```
