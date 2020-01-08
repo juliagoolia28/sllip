@@ -36,7 +36,7 @@ cd /data/
 ```
 -  You should now be within the container and can run the conversion. **SUBJECTID in all caps should be edited:**
 ```
-heudiconv -d /data/dicoms/{subject}/*/*/*.IMA -s SUBJECTID -f /sllip_heuristics.py -c dcm2niix -b -o /data/bids
+heudiconv -d /data/dicoms/{subject}/*/*/*.IMA -s SUBJECTID -f /data/sllip_heuristics.py -c dcm2niix -b -o /data/bids
 ```
 - Once the conversion is complete, back up the BIDS data to NAS:
 ```
