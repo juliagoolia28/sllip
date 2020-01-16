@@ -39,3 +39,29 @@ The participant should have at least one .MP3 file, but it is okay if they have 
 cd /nas/projects/sllip/data/assessments/
 ```
 - LENA Audio Files are checked by Julie or Hannah (please skip)
+
+## Checking Data Processing 
+After we begin to transfer and analyze a participant's data, we want to ensure that data has been transferred to the correct locations and analyzed. Using the Data Transfer checklist in RedCap for each participant, you can use the following code to easily check on data analysis for each participant.
+
+For this task, you will need to work on the Linux computer:
+```
+ssh qigroup@sylvian.ling.udel.edu
+```
+Information about password & google authenticator are located in the lab.
+
+- Dicoms transferred locally to dicom_conversion folder
+```
+cd /home/qigroup/Documents/projects/sllip/dicom_conversion/dicoms
+```
+- Dicoms transferred to nas
+```
+cd /home/nas/projects/sllip/data/mri/dicoms
+```
+- Dicoms converted to BIDS formatted nifti files
+```
+cd /home/qigroup/Documents/projects/sllip/dicom_conversion/bids
+```
+- BIDS transferred to nas
+```
+cd /home/nas/projects/sllip/data/mri/bids
+```
