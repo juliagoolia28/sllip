@@ -10,4 +10,32 @@ Everytime you work on SLLIP data analysis, you need to work within a designated 
 source ~/.bashrc
 sllip_env
 ```
+## Checking Data Transfer
+After running a participant, we want to ensure that data has been transferred to the correct locations. Using the Data Transfer checklist in RedCap for each participant, you can use the following code to easily check on data for each participant. 
+Be sure that nas (the Qlab drive) is mapped onto whatever computer you are working on
 
+- MRI In-Scanner behavioral (Order_N = Order_1 or Order_2)
+
+The participant should have the following file types: .csv, .log & .psydat. They will have these three files for auditory_1 and auditory_3.
+```
+cd /nas/projects/sllip/data/in-scanner-behavioral/Order_N/
+```
+- MRI data to Dicoms computer is checked at the CBBI (please skip)
+- MRI data to DCM storage
+```
+cd /nas/dcmstorage/
+```
+- MRE via Twix is completed by Julie (please skip)
+- Video from SD Card
+
+The participant should have at least one .MP4 file. It is okay if there are multiple.
+```
+cd /nas/projects/sllip/data/mother-child_dyads/
+```
+- Audio from Voice Recorder
+
+The participant should have at least one .MP3 file, but it is okay if they have a folder created with multiple files.
+```
+cd /nas/projects/sllip/data/assessments/
+```
+- LENA Audio Files are checked by Julie or Hannah (please skip)
