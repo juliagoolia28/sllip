@@ -39,6 +39,9 @@ The participant should have at least one .MP3 file, but it is okay if they have 
 cd /nas/projects/sllip/data/assessments/
 ```
 - LENA Audio Files are checked by Julie or Hannah (please skip)
+```
+cd /nas/projects/sllip/LENA/
+```
 
 ## Checking Data Processing 
 After we begin to transfer and analyze a participant's data, we want to ensure that data has been transferred to the correct locations and analyzed. Using the Data Transfer checklist in RedCap for each participant, you can use the following code to easily check on data analysis for each participant.
