@@ -1,4 +1,4 @@
-##Skullstripping
+## Skullstripping
 Written by Jen Legault and Nicola Bautista (https://github.com/Qlab-UDel/qlab/wiki/Skullstripping)
 
 *Adjusting watershed parameters for ideal brainmask volume*
@@ -7,7 +7,7 @@ It's super simple and fast!
 
 **Adjust the watershed parameter.** Before you do anything, make sure to backup the old brainmask. To do this, go into the `mri` directory of the brain you're working on and then copy the `brainmask.mgz` file to a backup file called `brainmask_orig.mgz`. From now on, we only make edits to `brainmask.mgz`. 
 
-## Skullstripping
+### Main Steps
 
 1. Open FreeView by clicking “view subject”, then open the Volume files brainmask.mgz and orig.mgz from the mri folder, and make sure you put brainmask above orig. Change the colormap of brainmask to heat and lower the opacity a little bit so you can see it overlaid on orig (I personally find that an opacity of ~0.11 works well). 
 
