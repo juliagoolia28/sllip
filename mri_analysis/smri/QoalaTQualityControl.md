@@ -24,11 +24,9 @@ To remote in:
 
 Navigate to the folder where your Freesurfer reconstructed files are, designate this as the subject's directory, and create a folder where you want the output to go.
 
-```cd /home/qigroup/Documents/<path_to_Freesurfer_reconstructed_files>```
+```cd /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/```
 
-```export SUBJECTS_DIR=/home/qigroup/Documents/<path_to_Freesurfer_reconstructed_files>```
-
-```mkdir <your_folder_name>```
+```export SUBJECTS_DIR=/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/```
 
 #### Designate which subjects you will be extracting gray matter measures from
 
@@ -41,21 +39,21 @@ For example, if I wanted to include all the participants in the main Freesurfer 
 #### Extract gray matter measures
 Here, you will be running a series of commands that will extract gray matter volume (asegstats2table command), cortical thickness (aparcstats2table commands for each hemisphere), and surface area (also aparcstats2table commands for each hemisphere) measures for each participant in your list.
 
-```asegstats2table --subjects $list --meas volume --skip --tablefile /home/qigroup/Documents/<path_to_Freesurfer_reconstructed_files>/<your_folder_name>/aseg_stats.txt```
+```asegstats2table --subjects $list --meas volume --skip --tablefile /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/aseg_stats.txt```
 
-```aparcstats2table --subjects $list --hemi lh --meas thickness --skip --tablefile /home/qigroup/Documents/<path_to_Freesurfer_reconstructed_files>/<your_folder_name>/aparc_thickness_lh.txt```
+```aparcstats2table --subjects $list --hemi lh --meas thickness --skip --tablefile /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/aparc_thickness_lh.txt```
 
-```aparcstats2table --subjects $list --hemi rh --meas thickness --skip --tablefile /home/qigroup/Documents/<path_to_Freesurfer_reconstructed_files>/<your_folder_name>/aparc_thickness_rh.txt```
+```aparcstats2table --subjects $list --hemi rh --meas thickness --skip --tablefile /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/aparc_thickness_rh.txt```
 
-```aparcstats2table --subjects $list --hemi lh --meas area --skip --tablefile /home/qigroup/Documents/<path_to_Freesurfer_reconstructed_files>/<your_folder_name>/aparc_area_lh.txt```
+```aparcstats2table --subjects $list --hemi lh --meas area --skip --tablefile /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/aparc_area_lh.txt```
 
-```aparcstats2table --subjects $list --hemi rh --meas area --skip --tablefile /home/qigroup/Documents/<path_to_Freesurfer_reconstructed_files>/<your_folder_name>/aparc_area_rh.txt```
+```aparcstats2table --subjects $list --hemi rh --meas area --skip --tablefile /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/aparc_area_rh.txt```
 
 #### Double check your work
 
 Navigate to your designated output folder and check to see if all 5 text files were created.
 
-```cd /home/qigroup/Documents//<path_to_Freesurfer_reconstructed_files>/<your_folder_name>/```
+```cd /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/```
 
 ```ls```
 
@@ -69,6 +67,4 @@ Go to the online [Qoala-T app](https://qoala-t.shinyapps.io/qoala-t_app/) and in
 
 Then look at the graphical output, save this image, and download the .csv file.
 
-**Next Step:** [[Manual Inspection of Data]]
-
-**Previous Step:** [[Freesurfer Overview]]
+**Next Step:** Manual Inspection of Data
