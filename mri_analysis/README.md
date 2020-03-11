@@ -43,9 +43,23 @@ heudiconv -d /data/dicoms/{subject}/*/*/*.IMA -s SUBJECTID -f /data/sllip_heuris
 rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/dicom_conversion/bids/ /home/nas/projects/sllip/data/mri/bids
 ```
 ## Prepare data for Freesurfer edits
-We next need to convert the anatomical data to be corrected within Freesurfer. **SUBJECTID in all caps should be edited:**
+-  We next need to convert the anatomical data to be corrected within Freesurfer. **SUBJECTID in all caps should be edited:**
 ```
 docker run -ti --rm -v /home/qigroup/Documents/projects/sllip/dicom_conversion/bids:/data:ro -v /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives:/out -v /home/qigroup/Documents/projects/sllip/license.txt:/opt/freesurfer/license.txt poldracklab/fmriprep:1.3.1 /data /out participant --participant_label SUBJECTID --anat-only
 ```
+-  Check anatomical data using Quola-T and make any necessary freesurfer edits, as described in the sMRI analysis folder of this directory.
 
-
+-  Backup the derivatives folder to NAS:
+```
+rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/ /home/nas/projects/sllip/data/mri/derivatives
+```
+## Run fMRIprep on ALL functional data, using corrected sMRI data
+-  Documentation on running/troubleshootin fMRIprep can be found at: http://reproducibility.stanford.edu/fmriprep-tutorial-running-the-docker-image/
+-  Run the below code **SUBJECTID in all caps should be edited:**
+```
+fmriprep-docker //home/qigroup/Documents/projects/sllip/dicom_conversion/bids /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives participant --participant-label SUBJECTID --fs-license-file /home/qigroup/Documents/projects/sllip/license.txt
+```
+-  Backup the derivatives folder to NAS again:
+```
+rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/ /home/nas/projects/sllip/data/mri/derivatives
+```
