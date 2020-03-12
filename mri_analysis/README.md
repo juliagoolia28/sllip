@@ -57,7 +57,7 @@ rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/dicom_conversion/de
 -  Documentation on running/troubleshootin fMRIprep can be found at: http://reproducibility.stanford.edu/fmriprep-tutorial-running-the-docker-image/
 -  Run the below code **SUBJECTID in all caps should be edited:**
 ```
-fmriprep-docker //home/qigroup/Documents/projects/sllip/dicom_conversion/bids /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives participant --participant-label SUBJECTID --fs-license-file /home/qigroup/Documents/projects/sllip/license.txt
+fmriprep-docker /home/qigroup/Documents/projects/sllip/dicom_conversion/bids /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives participant --participant-label SUBJECTID --fs-license-file /home/qigroup/Documents/projects/sllip/license.txt
 ```
 -  Backup the derivatives folder to NAS again:
 ```
