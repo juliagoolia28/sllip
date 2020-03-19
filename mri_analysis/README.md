@@ -63,3 +63,10 @@ fmriprep-docker /home/qigroup/Documents/projects/sllip/dicom_conversion/bids /ho
 ```
 rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/ /home/nas/projects/sllip/data/mri/derivatives
 ```
+## FSL fMRI Analysis
+### Organize behavioral in-scanner event codes for fMRI data
+-  To conduct FSL first-level analyses, each subject requires an event code file for each run of data.
+-  In-scanner behavioral data is all located in a single folder that the script *sllip_inscanner_FSL_event_recode.ipynb* should be one level outside of. 
+- Run the jupyter notebook *sllip_inscanner_FSL_event_recode.ipynb*
+
+### First-level Analysis
