@@ -70,3 +70,4 @@ rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/dicom_conversion/de
 - Run the jupyter notebook *sllip_inscanner_FSL_event_recode.ipynb*
 
 ### First-level Analysis
+- Follow the README.md instructions here: <https://github.com/juliagoolia28/sllip/tree/master/mri_analysis/firstlevel_fsl>
