@@ -47,7 +47,7 @@ Step 4.
 - In terminal, execute the script *feat_firstlevel.sh*:
 ```sh feat_firstlevel.sh```
 
-Step 4. 
+Step 5. 
 - Once all first level feat analyses are run, we need to fix our registration (to understand why, listen to the pro: <https://mumfordbrainstats.tumblr.com/post/166054797696/feat-registration-workaround>)
 - Execute the script *correcting_reg.sh*:
 ```sh correcting_reg.sh```
