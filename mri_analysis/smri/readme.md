@@ -30,10 +30,10 @@ Freesurfer provides a very simple and organized method for extracting gray matte
 
 ## **To Start**
 ### **Set up your subject's directory**
-Setting up your subject's directory informs Freesurfer where you want your created files to go.  Make sure you go to the directory (main folder) where all the participant’s reconstructed data are (so you should see all your subjects' folders here, make sure you do not go into just one subject's folder). Then, you should designate where you want the output files to go (usually I just put them in this same central location as where the reconstructed data are, since freesurfer tends to work better when I do this) using the export command.
+Setting up your subject's directory informs Freesurfer where you want your created files to go.  Make sure you go to the directory (main folder) where you want where you want the output files to go. Then, you should designate where all the participant’s reconstructed data are (so you should see all your subjects' folders here, make sure you do not go into just one subject's folder). 
 ````
-cd /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer
-export SUBJECTS_DIR=/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/smri_extractions
+cd /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/smri_extractions
+export SUBJECTS_DIR=/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer
 ````
 To double check that you have set the correct subject’s directory you can run the command:
 ````
@@ -49,6 +49,10 @@ Here are the commands you would run for extracting the cortical thickness for th
 aparcstats2table --subjects <subject_1_ID>  <subject_2_ID>  --hemi rh --meas thickness --tablefile <filename>.txt
 aparcstats2table --subjects <subject_1_ID>  <subject_2_ID>  --hemi lh --meas thickness --tablefile <filename>.txt
 ````
+An example of this command in the right hemisphere with 14 subjects:
+```
+aparcstats2table --subjects sub-sllip001 sub-sllip002 sub-sllip004 sub-sllip005 sub-sllip006 sub-sllip007 sub-sllip008 sub-sllip009 sub-sllip010 sub-sllip011 sub-sllip012 sub-sllip013 sub-sllip014 sub-sllip015  --hemi rh --meas thickness --tablefile aparc_rh_n14_040120.txt
+```
 #### **Extracting gray matter volume data**
 Here are the commands you would run for extracting the gray matter volume for the right hemisphere and left hemisphere:
 ````
