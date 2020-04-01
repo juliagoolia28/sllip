@@ -1,0 +1,63 @@
+---
+title: "SLLIP_LENA_WC_data"
+author: "JM Schneider"
+date: "4/1/2020"
+output: html_document
+---
+## The current script takes LENA snapshot data from the SLLIP project and re-organizes/summarizes it for subsequent data analyses. 
+
+### Import libraries
+```{r loadlib, echo=T, results='hide', message=F, warning=F}
+library(psych)
+library(readr)
+library(optimx)
+library(corrplot)
+library(reshape)
+library(reshape2)
+library(lmerTest)
+library(ggplot2)
+library(scales)
+library(ggbeeswarm)
+library(Hmisc)
+library(arm)
+library(ez)
+library(dplyr)
+library(arm)
+```
+
+### Load LENA data output as dataframe
+
+```{r}
+setwd("/Volumes/data/projects/sllip/data/mother-child_dyads/lena_output/")
+df_hour=read.csv('LENAExport_Hourly_040120.csv')
+```
+
+### Clean the dataframe by removing unneccessary columns of data
+```{r}
+df_hour <- subset(df_hour, select = -c(ChildKey,RecordingDate,StartTime,EndTime,ProgramType,OrgID,GroupID,RecGroupID,ParticipantID,Recording.ID,HiddenRec,ExcludeFromAnalysis,FilteredRec,ErrorCodes,RecorderSerialNumber,ITS_File_Name,DatabaseInsertDateTime,RecorderTransferDateTime,Timezone))
+```
+
+### Delete rows of repetitve data
+```{r}
+df_hour_clean <- df_hour %>% group_by(ExternalReferenceID) %>% top_n(1, AWC_COUNT)
+```
+
+### Normalize three variables of interest: AWC, CV, CT
+```{r}
+df_hour_clean$AWC_COUNT_norm <- rescale(df_hour_clean$AWC_COUNT, binary.inputs="center")
+df_hour_clean$CT_COUNT_norm <- rescale(df_hour_clean$CT_COUNT, binary.inputs="center")
+df_hour_clean$CV_COUNT_norm <- rescale(df_hour_clean$CV_COUNT, binary.inputs="center")
+```
+
+### Export data for later analysis
+```{r}
+write.csv(df_hour_clean, file = "/Volumes/data/projects/sllip/data/mother-child_dyads/lena_output/LENA_Cleaned_Hourly_040120.csv")
+```
+
+### Plotting preliminary data
+```{r AWC, echo=FALSE}
+plot(df_hour_clean$AWC_COUNT_norm)
+plot(df_hour_clean$CT_COUNT_norm)
+plot(df_hour_clean$CV_COUNT_norm)
+```
+
