@@ -34,9 +34,9 @@ See below for an example of how you should fill out the spreadsheet.
 ### Open Freeview GUI 
 Freeview is a Freesurfer-based visualization toolkit. You should use our python script to help pull up Freeview, which will then have most of brain tissue overlays needed to assess the data.
 
-1. First open the python script
+1. First open the python script on any Mac computer with the mnt connected (if it is not connected, notify a lead researcher)
 
-```python /home/qigroup/Documents/projects/blast/data/mri/imaging/scripts/edit_freesurfer_surface.py```
+```python /Users/qigroup/mnt/sylvian/blast/data/mri/imaging/scripts/edit_freesurfer_surface_JMS.py```
 
 2. Designate the directory to where you have the Freesurfer reconstructed data
 
