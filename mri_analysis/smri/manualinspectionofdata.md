@@ -19,7 +19,7 @@ When inspecting data, you should consider the following questions to help you de
 4. Are parts of the cortex missing in the reconstruction (other than temporal poles)?
 
 ## Documentation of Errors and Edits
-You should document any errors you see in the MRI data along with your Freesurfer edit changes using our [Qoala-T QC template spreadsheet](https://github.com/jlegault/Materials_for_Inspection_of_sMRI_data/blob/master/Qoala-T_QC_spreadsheet.xlsx).  
+You should document any errors you see in the MRI data along with your Freesurfer edit changes using our [Qoala-T QC template spreadsheet](https://github.com/juliagoolia28/sllip/blob/master/mri_analysis/smri/Qoala-T_QC_spreadsheet.xlsx).  
 
 For each participant, if there is an error in movement, missing or extra gray or white matter, you should put a 1 and highlight this in red in the respective column demarcating the error.  If not, then mark it with a zero so we know this was still inspected. **You should only mark errors that are seen across 3 consecutive slices of the brain.**
 
