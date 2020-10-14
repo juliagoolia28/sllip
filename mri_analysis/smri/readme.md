@@ -6,22 +6,10 @@ Always remember to work in the sllip environment:
 ```
 sllip_env
 ```
-
-Run command:
-```
-python /home/qigroup/Documents/projects/blast/data/mri/imaging/scripts/edit_freesurfer_surface.py
-```
-When the software loads, ensure Project Surface Directory reads:\
-/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/
-
-Enter the subject ID: sub-sllip###
-
-### These edits are listed in the general order in which they should be done:
+### Edits will generally be conducted in the following order:
 Quality Control > Manual Inspection of Data > Skullstrip > Reconstruction > Control Point Edits > Reconstruction > White Matter Edits > Reconstruction
 
-## After reconstruction, it is time for structural data analysis.
-This information was created from:https://github.com/juliagoolia28/qlab/edit/master/analysis/mri-analysis/structural/README.md
-
+### But first, you need to extract your sMRI values using the following steps, if you haven't already:
 ## **Extracting gray matter measures**
 This tutorial will show you how to extract your gray matter volume (GMV) and cortical thickness (CT) measures from your freesurfer reconstructed data.  This step comes after the final reconstruction step (using the recon-all -autorecon-all command). Therefore, in this tutorial whenever I refer to reconstructed data, I am referring to the output files that Freesurfer creates and fills in during the recon-all process.
 
