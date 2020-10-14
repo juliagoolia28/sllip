@@ -34,14 +34,25 @@ See below for an example of how you should fill out the spreadsheet.
 ### Open Freeview GUI 
 Freeview is a Freesurfer-based visualization toolkit. You should use our python script to help pull up Freeview, which will then have most of brain tissue overlays needed to assess the data.
 
-1. First open the python script on any Mac computer with the mnt connected (if it is not connected, notify a lead researcher)
+*If using Mac Mini 2*
+1. First open the python script on the Mac Mini 2 computer with the mnt connected (if it is not connected, notify a lead researcher)
 
 ```python /Users/qigroup/mnt/sylvian/blast/data/mri/imaging/scripts/edit_freesurfer_surface_JMS.py```
 
 2. Designate the directory to where you have the Freesurfer reconstructed data
 
+```/Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer```
+
+*If using Sylvian*
+1. First open the python script on the Sylvian computer using Teamview (if Teamview is not working, notify a lead researcher)
+
+```python /home/qigroup/Documents/projects/blast/data/mri/imaging/scripts/edit_freesurfer_surface.py```
+
+2. Designate the directory to where you have the Freesurfer reconstructed data
+
 ```/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/```
 
+*On either computer*
 3. Select the subject, check that the surface was found, and hit OK.
 
 ![](https://github.com/jlegault/Materials_for_Inspection_of_sMRI_data/blob/master/Images_for_wiki_page/python_script_find_subject.png)
