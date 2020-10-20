@@ -2,14 +2,21 @@
 ## This section overviews how to analyze sMRI data using Qoala-T and Freesurfer. 
 This information was created from: https://github.com/Qlab-UDel/qlab/wiki/FreeSurfer-Overview
 
+## You will do this analysis once. After this is done, you will complete the next steps in the following order:
+Quality Control > Manual Inspection of Data > Skullstrip > Reconstruction > Control Point Edits > Reconstruction > White Matter Edits > Reconstruction
+
+### Open a shell
+Make sure you are logged into the sylvian computer system.
+To remote in:
+
+```ssh –XY qigroup@sylvian.ling.udel.edu```
+
+### Load the environment
 Always remember to work in the sllip environment:
 ```
 sllip_env
 ```
-### Edits will generally be conducted in the following order:
-Quality Control > Manual Inspection of Data > Skullstrip > Reconstruction > Control Point Edits > Reconstruction > White Matter Edits > Reconstruction
-
-### But first, you need to extract your sMRI values using the following steps, if you haven't already:
+### First, you need to extract your sMRI values using the following steps, if you haven't already:
 ## **Extracting gray matter measures**
 This tutorial will show you how to extract your gray matter volume (GMV) and cortical thickness (CT) measures from your freesurfer reconstructed data.  This step comes after the final reconstruction step (using the recon-all -autorecon-all command). Therefore, in this tutorial whenever I refer to reconstructed data, I am referring to the output files that Freesurfer creates and fills in during the recon-all process.
 
