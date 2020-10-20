@@ -1,8 +1,7 @@
 # Using Qoala-T to help with quality control of Freesurfer reconstructed files
 Written by Jen Legault (https://github.com/Qlab-UDel/qlab/wiki/Qoala-T-Quality-Control)
 
-After Freesurfer reconstruction, we should always make sure the files were properly reconstructed, especially for child populations.  This is because children tend to move a lot and
-their brains are more difficult to model due to high developmental variations between children.  
+After Freesurfer reconstruction, we should always make sure the files were properly reconstructed, especially for child populations.  This is because children tend to move a lot and their brains are more difficult to model due to high developmental variations between children.  
 Therefore, we will use Qoala-T to help us decide which subject files to include, exclude, and/or fix.
 
 ## What is Qoala-T?
