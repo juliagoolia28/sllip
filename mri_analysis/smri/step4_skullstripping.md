@@ -5,9 +5,15 @@ Written by Jen Legault and Nicola Bautista (https://github.com/Qlab-UDel/qlab/wi
 
 It's super simple and fast!
 
-**Adjust the watershed parameter.** Before you do anything, make sure to backup the old brainmask. To do this, go into the `mri` directory of the brain you're working on and then copy the `brainmask.mgz` file to a backup file called `brainmask_orig.mgz`. From now on, we only make edits to `brainmask.mgz`. 
+## FIRST STEP
+Before you do anything, make sure to backup the old brainmask. To do this, you will copy the `brainmask.mgz` in `mri` directory to a backup file called `brainmask_orig.mgz`. 
 
-### Main Steps
+Example (must edit sub-sllipID to subject #):
+```qigroup$ cp /Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer/sub-sllipID/mri/brainmask.mgz /Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer/sub-sllipID/mri/orig_brainmask.mgz```
+
+From now on, we only make edits to `brainmask.mgz`. 
+
+## Next Steps
 1. Open FreeView
 
 *If using Mac Mini 1*
@@ -32,11 +38,11 @@ It's super simple and fast!
 3. Select the subject, check that the surface was found, and hit OK.
 4. Click on the Editing Brain Actions tab
 5. Click on the View subject button (wait for a minute until everything loads)
-6. Open the Volume files brainmask.mgz and orig.mgz from the mri folder, and make sure you put brainmask above orig. Change the colormap of brainmask to heat and lower the opacity a little bit so you can see it overlaid on orig (I personally find that an opacity of ~0.11 works well). 
-
-2. Skullstripping is based on the watershed parameter, which helps FreeSurfer make the brainmask. The default value is 25. If the red area of the brainmask volume includes some of the skull, lower the watershed parameter. If the brainmask is too small and doesn't include some of the brain matter, you'll want to increase the watershed parameter. 
-
-3. Exit FreeView and the GUI. In the terminal, run the command:
+6. Open the Volume files (File>Load Volume) brainmask.mgz and orig.mgz from the mri folder, and make sure you put brainmask above orig (using the blue arrows)
+7. Change the colormap of brainmask to heat and lower the opacity a little bit so you can see it overlaid on orig (I personally find that an opacity of ~0.11 works well). 
+8. Skullstripping is based on the watershed parameter, which helps FreeSurfer make the brainmask. The default value is 25. If the red area of the brainmask volume includes some of the skull, you will want to lower the watershed parameter. If the brainmask is too small and doesn't include some of the brain matter, you'll want to increase the watershed parameter. Here is how you will do that:
+  - Exit FreeView and the GUI. 
+  - In the terminal, run the command:
 ```bash
 recon-all -skullstrip  -clean-bm -gcut -subjid [subject id]
 ```
