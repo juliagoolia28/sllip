@@ -34,8 +34,8 @@ See below for an example of how you should fill out the spreadsheet.
 ### Open Freeview GUI 
 Freeview is a Freesurfer-based visualization toolkit. You should use our python script to help pull up Freeview, which will then have most of brain tissue overlays needed to assess the data.
 
-*If using Mac Mini 2*
-1. First open the python script on the Mac Mini 2 computer with the mnt connected (if it is not connected, notify a lead researcher)
+*If using Mac Mini 1*
+1. First open the python script on the Mac Mini 1 computer with the mnt connected (if it is not connected, notify a lead researcher)
 
 ```python /Users/qigroup/mnt/sylvian/blast/data/mri/imaging/scripts/edit_freesurfer_surface_JMS.py```
 
@@ -58,7 +58,7 @@ Freeview is a Freesurfer-based visualization toolkit. You should use our python 
 ![](https://github.com/jlegault/Materials_for_Inspection_of_sMRI_data/blob/master/Images_for_wiki_page/python_script_find_subject.png)
 
 4. Click on the Editing Brain Actions tab
-5. Click on the View subject button
+5. Click on the View subject button (be patient, this will take a minute to load)
 
 ### Check for movement
 If it looks like there are “rings” around the brain, there is likely a significant amount of movement.  Check to see if this is seen across 3 consecutive slices of the brain or more.  Below is a picture of a participant with significant movement.  Therefore, we would write a 1 in the "excessive movement" column of the Qoala-T QC template spreadsheet.
