@@ -1,7 +1,7 @@
 ## Control Point Edits
 Written by Jen Leagult and Nicola Bautista: https://github.com/Qlab-UDel/qlab/wiki/Control-Point-Edits
 
-Now go to FreeView and you can start making control point edits:
+Now go to FreeView (type 'freeview' in terminal) and you can start making control point edits:
 On the left, you will see 3 tabs (Volumes, Surfaces, Point Sets).
 
 **Loading the Necessary Files**
@@ -12,7 +12,7 @@ On the left, you will see 3 tabs (Volumes, Surfaces, Point Sets).
     - Play with the opacity of the `wm` volume until you see white/gray matter contrast. 
 
 2. Surfaces
-    - Now go under the "Surfaces" tab and click on the icon with the green '+'. This time, go to the folder that contains the surfaces (it's usually called `surf`). Load `lh.white` and `rh.white`.
+    - Now go under the "Surfaces" tab and click on the icon with the green '+' (Load Surfaces). This time, go to the folder that contains the surfaces (it's usually called `surf`). Load `lh.white` and `rh.white`.
 
 3. Point Sets  
 *This is essential to adding control points.*
