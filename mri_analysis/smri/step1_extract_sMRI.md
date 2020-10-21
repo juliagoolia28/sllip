@@ -30,7 +30,7 @@ Setting up your subject's directory informs Freesurfer where you want your creat
 On Mac Mini 1:
 
 ```
-cd /Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer
+cd /Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/smri_extractions
 export SUBJECTS_DIR=/Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer
 ````
 
