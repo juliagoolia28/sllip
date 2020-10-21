@@ -8,58 +8,45 @@ It's super simple and fast!
 ## FIRST STEP
 Before you do anything, make sure to backup the old brainmask. To do this, you will copy the `brainmask.mgz` in `mri` directory to a backup file called `brainmask_orig.mgz`. 
 
-Example (must edit sub-sllipID to subject #):
+Example on Mac Mini 1 (must edit sub-sllipID to subject #):
 
 ```cp /Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer/sub-sllipID/mri/brainmask.mgz /Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer/sub-sllipID/mri/orig_brainmask.mgz```
 
 From now on, we only make edits to `brainmask.mgz`. 
 
+Also, be sure your SUBJECT DIRS are correctly setup:
+On Mac Mini 1:
+
+```
+export SUBJECTS_DIR=/Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer
+```
+
+On Sylvian:
+
+```
+export SUBJECTS_DIR=/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer
+```
+
+To double check that you have set the correct subject’s directory you can run the command:
+
+```
+echo $SUBJECTS_DIR
+```
+
 ## Next Steps
-1. Open FreeView
+1. Open FreeView (type 'freeview' in terminal)
 
-*If using Mac Mini 1*
-1. First open the python script on the Mac Mini 1 computer with the mnt connected (if it is not connected, notify a lead researcher)
+2. Open the following Volume files (File>Load Volume): brainmask.mgz and orig.mgz from the subject's mri folder, and make sure you put brainmask above orig (using the blue arrows)
 
-```python /Users/qigroup/mnt/sylvian/blast/data/mri/imaging/scripts/edit_freesurfer_surface_JMS.py```
+3. Change the colormap of brainmask to heat and lower the opacity a little bit so you can see it overlaid on orig (I personally find that an opacity of ~0.11 works well). 
 
-2. Designate the directory to where you have the Freesurfer reconstructed data
-
-```/Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer```
-
-*If using Sylvian*
-1. First open the python script on the Sylvian computer using Teamview (if Teamview is not working, notify a lead researcher)
-
-```python /home/qigroup/Documents/projects/blast/data/mri/imaging/scripts/edit_freesurfer_surface.py```
-
-2. Designate the directory to where you have the Freesurfer reconstructed data
-
-```/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/```
-
-*On either computer*
-
-3. Select the subject, check that the surface was found, and hit OK.
-
-4. Click on the Editing Brain Actions tab
-
-5. Click on the View subject button (wait for a minute until everything loads)
-
-6. Open the Volume files (File>Load Volume) brainmask.mgz and orig.mgz from the mri folder, and make sure you put brainmask above orig (using the blue arrows)
-
-7. Change the colormap of brainmask to heat and lower the opacity a little bit so you can see it overlaid on orig (I personally find that an opacity of ~0.11 works well). 
-
-8. Skullstripping is based on the watershed parameter, which helps FreeSurfer make the brainmask. The default value is 25. If the red area of the brainmask volume includes some of the skull, you will want to lower the watershed parameter. 
+4. Skullstripping is based on the watershed parameter, which helps FreeSurfer make the brainmask. The default value is 25. Run the following command to automatically adjust the watershed and compare how similar or different the brainmask is:
   - Exit FreeView and the GUI. 
   - In the terminal, run the command:
 ```
 recon-all -skullstrip  -clean-bm -gcut -subjid [subject id]
 ```
-If the brainmask is too small and doesn't include some of the brain matter, you'll want to increase the watershed parameter. Here is how you will do that:
-  - Exit FreeView and the GUI. 
-  - In the terminal, run the command (where h is the new watershed value):
-```
-recon-all -skullstrip -wsthresh <h> -clean-bm -subjid <subject name>
-```
 
-Reopen the brain volumes in FreeView by clicking “View gcuts effect” and repeat the process until the brainmask is as good as possible. A good technique is to start by steadily lowering the watershed parameter by ~2 until it starts cutting into the brain, and then bump it back up so it includes the entire brain.
+5. Reopen the brain volumes in FreeView by loading the  brainmask.gcuts.mgz file. Does the brainmask now more accurately account for brain matter than before? Continue to repeat this process until the brainmask is as good as possible. 
 
 **Next step:** Control Point Edits
