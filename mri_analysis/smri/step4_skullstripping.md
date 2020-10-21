@@ -36,11 +36,17 @@ From now on, we only make edits to `brainmask.mgz`.
 ```/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/```
 
 *On either computer*
+
 3. Select the subject, check that the surface was found, and hit OK.
+
 4. Click on the Editing Brain Actions tab
+
 5. Click on the View subject button (wait for a minute until everything loads)
+
 6. Open the Volume files (File>Load Volume) brainmask.mgz and orig.mgz from the mri folder, and make sure you put brainmask above orig (using the blue arrows)
+
 7. Change the colormap of brainmask to heat and lower the opacity a little bit so you can see it overlaid on orig (I personally find that an opacity of ~0.11 works well). 
+
 8. Skullstripping is based on the watershed parameter, which helps FreeSurfer make the brainmask. The default value is 25. If the red area of the brainmask volume includes some of the skull, you will want to lower the watershed parameter. 
   - Exit FreeView and the GUI. 
   - In the terminal, run the command:
