@@ -26,7 +26,17 @@ Freesurfer provides a very simple and organized method for extracting gray matte
 ## **To Start**
 ### **Set up your subject's directory**
 Setting up your subject's directory informs Freesurfer where you want your created files to go.  Make sure you go to the directory (main folder) where you want where you want the output files to go. Then, you should designate where all the participant’s reconstructed data are (so you should see all your subjects' folders here, make sure you do not go into just one subject's folder). 
+
+On Mac Mini 1:
+
+```
+cd /Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer
+export SUBJECTS_DIR=/Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer
 ````
+
+On Sylvian:
+
+```
 cd /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/smri_extractions
 export SUBJECTS_DIR=/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer
 ````
