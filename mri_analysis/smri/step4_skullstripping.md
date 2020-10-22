@@ -40,13 +40,23 @@ echo $SUBJECTS_DIR
 
 3. Change the colormap of brainmask to heat and lower the opacity a little bit so you can see it overlaid on orig (I personally find that an opacity of ~0.11 works well). 
 
-4. Skullstripping is based on the watershed parameter, which helps FreeSurfer make the brainmask. The default value is 25. Run the following command to automatically adjust the watershed and compare how similar or different the brainmask is:
-  - Exit FreeView and the GUI. 
-  - In the terminal, run the command:
+4. One way to control the amount of skull that is removed is by adjusting a parameter called the watershed threshold. During recon-all’s autorecon1, the skull is stripped using a watershed threshold of 25; this parameter can take any value from 0 to 50. Increasing the threshold will increase the likelihood that both brain and skull will remain (i.e., it will be a more lenient skull-strip), while decreasing the threshold will run a more aggressive skull-strip.
+  - Exit FreeView and the GUI. In the terminal, run the command:
+```
+recon-all -skullstrip -wsthresh <h> -clean-bm -s [subject id]
+```
+  - Where <h> is the new threshold  and subject id is your subject
+  - This will create a new brainmask.mgz file, which now has more of the skull removed.
+  - Even with a lower watershed threshold, there may still be bits of skull and dura mater that remain. You can use the -gcut option to remove the latter:
+  
 ```
 recon-all -skullstrip  -clean-bm -gcut -subjid [subject id]
 ```
+  - To examine how much dura was removed, load the `brainmask.mgz`, `T1.mgz`, and `brainmask.gcuts.mgz` files in freeview
+  - After you use the watershed or gcut options, you will need to regenerate the pial surfaces with the following code:
 
-5. Reopen the brain volumes in FreeView by loading the  brainmask.gcuts.mgz file. Does the brainmask now more accurately account for brain matter than before? Continue to repeat this process until the brainmask is as good as possible. 
+```
+recon-all -autorecon-pial -subjid <subject name>
+```
 
 **Next step:** Control Point Edits
