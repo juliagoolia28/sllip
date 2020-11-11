@@ -1,7 +1,7 @@
 # Using Qoala-T to help with quality control of Freesurfer reconstructed files
 Written by Jen Legault (https://github.com/Qlab-UDel/qlab/wiki/Qoala-T-Quality-Control)
 
-After Freesurfer reconstruction, we should always make sure the files were properly reconstructed, especially for child populations.  This is because children tend to move a lot and their brains are more difficult to model due to high developmental variations between children.  
+We should always make sure the files were properly reconstructed, especially for child populations.  This is because children tend to move a lot and their brains are more difficult to model due to high developmental variations between children.  
 Therefore, we will use Qoala-T to help us decide which subject files to include, exclude, and/or fix.
 
 ## What is Qoala-T?
@@ -13,19 +13,37 @@ Qoala-T is a supervised-learning tool to assess accuracy of manual quality contr
 
 Qoala-T compares the gray matter measures for our data to see how well it fits with their gray matter model data from 784 scans of subjects aged 8 - 25 years old. 
 
-#### Open a shell
-Make sure you are logged into the sylvian computer system.
-To remote in:
+#### Open a shell OR screen share
+Make sure you are connected to the VPN.
+You may then log into the sylvian computer via terminal:
 
 ```ssh –XY qigroup@sylvian.ling.udel.edu```
+
+Or you may connect to the Mac Mini 1 using the screen share/team viewer option. 
+
+#### Load the environment
+Always remember to work in the sllip environment:
+```
+sllip_env
+```
 
 #### Designate the subject's directory
 
 Navigate to the folder where your Freesurfer reconstructed files are, designate this as the subject's directory, and create a folder where you want the output to go.
 
-```cd /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/```
+On Sylvian:
 
-```export SUBJECTS_DIR=/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/```
+```
+cd /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/smri_extractions
+export SUBJECTS_DIR=/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer
+````
+
+On Mac Mini 1:
+
+```
+cd /Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/smri_extractions
+export SUBJECTS_DIR=/Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer
+````
 
 #### Designate which subjects you will be extracting gray matter measures from
 
