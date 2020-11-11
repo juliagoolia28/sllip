@@ -34,14 +34,14 @@ Navigate to the folder where your Freesurfer reconstructed files are, designate 
 On Sylvian:
 
 ```
-cd /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/smri_extractions
+cd /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer
 export SUBJECTS_DIR=/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer
 ````
 
 On Mac Mini 1:
 
 ```
-cd /Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer/smri_outputs/smri_extractions
+cd /Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer
 export SUBJECTS_DIR=/Users/qigroup/mnt/sylvian/sllip/dicom_conversion/derivatives/freesurfer
 ````
 
