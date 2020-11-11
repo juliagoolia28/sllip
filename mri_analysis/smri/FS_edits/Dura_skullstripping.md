@@ -6,7 +6,7 @@ Written by Jen Legault and Nicola Bautista (https://github.com/Qlab-UDel/qlab/wi
 It's super simple and fast!
 
 ## FIRST STEP
-Before you do anything, make sure to backup the old brainmask. To do this, you will copy the `brainmask.mgz` in `mri` directory to a backup file called `brainmask_orig.mgz`. 
+**Before you do anything, make sure to backup the old brainmask. To do this, you will copy the `brainmask.mgz` in `mri` directory to a backup file called `brainmask_orig.mgz`. **
 
 Example on Mac Mini 1 (must edit sub-sllipID to subject #):
 
