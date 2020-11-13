@@ -1,0 +1,54 @@
+---
+title: "Web-based Tasks"
+author: "Julie M. Schneider"
+date: "`r format(Sys.Date())`"
+output:
+   html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+    css: style.css
+---
+
+```{r setup, include=FALSE, cache=F}
+knitr::opts_chunk$set(fig.width=6, fig.height=4, fig.path='Figs/', echo=TRUE, tidy=TRUE, message=F, warning=F, cache=T)
+```
+
+## Library Import
+```{r,include=FALSE,echo=FALSE,warning=FALSE}
+#Loading library
+library(ez); library(ggplot2); library(multcomp); library(nlme); library(pastecs); library(reshape)
+library(Hmisc); library (WRS2); library(lme4); library(lmerTest); library(plyr); library(splitstackshape) 
+library(naniar); library(tidyr); library(dplyr); library(memisc); library(psychReport); library(foreign); library(interactions); library(tableone); library(officer); library(magrittr); library(corrplot); library(effectsize); library(Rcmdr)
+
+julie.theme <- theme_bw() + theme(axis.line = element_line(colour = "black"), panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.border = element_blank(), panel.background = element_blank(), legend.title= element_blank())  #custom graphics theme for ggplot2
+```
+
+```{r}
+setwd("/Volumes/data/projects/sllip/data/web-based/")
+asl_df = read.csv("asl_task/asl_n10.csv")
+quil_df <- read.csv("quil_task/quil_n10.csv")
+```
+
+```{r}
+clean_asl <- data.frame(asl_df$Participant.Private.ID)
+clean_asl$accuracy <- asl_df$Correct[asl_df$Attempt==1]
+clean_asl<-clean_asl[complete.cases(clean_asl), ]
+asl_accuracy<-aggregate(clean_asl[, "accuracy"], list(clean_asl$asl_df.Participant.Private.ID), mean)
+```
+
+```{r}
+res <- t.test(asl_accuracy$x, mu = .50)
+res
+```
+```{r}
+clean_quil <- data.frame(quil_df$Participant.Private.ID)
+clean_quil$accuracy <- quil_df$Correct[quil_df$Attempt==1]
+clean_quil<-clean_quil[complete.cases(clean_quil), ]
+quil_accuracy<-aggregate(clean_quil[, "accuracy"], list(clean_quil$quil_df.Participant.Private.ID), mean)
+```
+
+```{r}
+res <- t.test(quil_accuracy$x, mu = .25)
+res
+```
