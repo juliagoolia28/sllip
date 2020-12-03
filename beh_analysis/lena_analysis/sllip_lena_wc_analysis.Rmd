@@ -30,16 +30,20 @@ library(arm)
 ```{r}
 setwd("/Volumes/data/projects/sllip/data/mother-child_dyads/lena_output/")
 df_hour=read.csv('LENAExport_Hourly_040120.csv')
+df_overall=read.csv('LENAExport_Recordings_120320.csv')
 ```
 
 ### Clean the dataframe by removing unneccessary columns of data
 ```{r}
 df_hour <- subset(df_hour, select = -c(ChildKey,RecordingDate,StartTime,EndTime,ProgramType,OrgID,GroupID,RecGroupID,ParticipantID,Recording.ID,HiddenRec,ExcludeFromAnalysis,FilteredRec,ErrorCodes,RecorderSerialNumber,ITS_File_Name,DatabaseInsertDateTime,RecorderTransferDateTime,Timezone))
+
+df_overall <- subset(df_overall, select = -c(ChildKey,RecordingDate,StartTime,EndTime,ProgramType,OrgID,GroupID,RecGroupID,ParticipantID,Recording.ID,HiddenRec,ExcludeFromAnalysis,FilteredRec,ErrorCodes,RecorderSerialNumber,ITS_File_Name,DatabaseInsertDateTime,RecorderTransferDateTime,Timezone))
 ```
 
 ### Delete rows of repetitve data
 ```{r}
 df_hour_clean <- df_hour %>% group_by(ExternalReferenceID) %>% top_n(1, AWC_COUNT)
+df_overall_clean <- df_overall %>% group_by(ExternalReferenceID) %>% top_n(1, AWC_COUNT)
 ```
 
 ### Normalize three variables of interest: AWC, CV, CT
@@ -47,11 +51,23 @@ df_hour_clean <- df_hour %>% group_by(ExternalReferenceID) %>% top_n(1, AWC_COUN
 df_hour_clean$AWC_COUNT_norm <- rescale(df_hour_clean$AWC_COUNT, binary.inputs="center")
 df_hour_clean$CT_COUNT_norm <- rescale(df_hour_clean$CT_COUNT, binary.inputs="center")
 df_hour_clean$CV_COUNT_norm <- rescale(df_hour_clean$CV_COUNT, binary.inputs="center")
+
+df_overall_clean$AWC_COUNT_norm <- rescale(df_overall_clean$AWC_COUNT, binary.inputs="center")
+df_overall_clean$CT_COUNT_norm <- rescale(df_overall_clean$CT_COUNT, binary.inputs="center")
+df_overall_clean$CV_COUNT_norm <- rescale(df_overall_clean$CV_COUNT, binary.inputs="center")
+```
+
+### Compute Proportions
+```{r}
+df_overall_clean$AWC_prop<- (df_overall_clean$AWC_COUNT/df_overall_clean$Duration_Secs)
+df_overall_clean$CT_prop<- (df_overall_clean$CT_COUNT/df_overall_clean$Duration_Secs)
+df_overall_clean$CV_prop<- (df_overall_clean$CV_COUNT/df_overall_clean$Duration_Secs)
 ```
 
 ### Export data for later analysis
 ```{r}
 write.csv(df_hour_clean, file = "/Volumes/data/projects/sllip/data/mother-child_dyads/lena_output/LENA_Cleaned_Hourly_040120.csv")
+write.csv(df_overall_clean, file = "/Volumes/data/projects/sllip/data/mother-child_dyads/lena_output/LENA_Cleaned_Overall_120220.csv")
 ```
 
 ### Plotting preliminary data
