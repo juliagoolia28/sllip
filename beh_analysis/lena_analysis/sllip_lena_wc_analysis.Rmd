@@ -23,6 +23,7 @@ library(arm)
 library(ez)
 library(dplyr)
 library(arm)
+library(tidyr)
 ```
 
 ### Load LENA data output as dataframe
@@ -70,10 +71,70 @@ write.csv(df_hour_clean, file = "/Volumes/data/projects/sllip/data/mother-child_
 write.csv(df_overall_clean, file = "/Volumes/data/projects/sllip/data/mother-child_dyads/lena_output/LENA_Cleaned_Overall_120220.csv")
 ```
 
+## Import Demographic Information
+```{r}
+df_dem_precovid=read.csv('/Volumes/data/projects/sllip/data/demographic/SLLIP _PreCOVID_Screener_12.03.csv')
+df_dem_covid=read.csv('/Volumes/data/projects/sllip/data/demographic/SLLIP_Covid_Survey_12.03.csv')
+df_dem<-dplyr::bind_rows(df_dem_precovid, df_dem_covid)
+```
+
+## Import Phone Screener Information
+```{r}
+df_phone=read.csv('/Volumes/data/projects/sllip/data/demographic/SLLIP_phonescreener_12-03.csv')
+names(df_phone)[names(df_phone) == "record_id"] <- "ExternalReferenceID"
+df_overall_clean$ExternalReferenceID<-as.numeric(df_overall_clean$ExternalReferenceID)
+df_beh_lena <- merge(df_phone,df_overall_clean,by="ExternalReferenceID")
+df_beh_lena_low <- df_beh_lena[which(df_beh_lena$free_reduced_lunch == 1),]
+#write.csv(df_beh_lena, file ="/Volumes/data/projects/sllip/data/demographic/SLLIP_phone_LENA.csv" )
+```
+
 ### Plotting preliminary data
 ```{r AWC, echo=FALSE}
-plot(df_hour_clean$AWC_COUNT_norm)
-plot(df_hour_clean$CT_COUNT_norm)
-plot(df_hour_clean$CV_COUNT_norm)
+plot(df_beh_lena_low$AWC_prop)
+plot(df_beh_lena_low$CT_prop)
+plot(df_beh_lena_low$CV_prop)
+
+plot(df_beh_lena_low$AWC_COUNT_norm)
+plot(df_beh_lena_low$CT_COUNT_norm)
+plot(df_beh_lena_low$CV_COUNT_norm)
+
+#df_beh_lena_low<- df_beh_lena_low[-c(6),]
+pdf(file = '/Volumes/data/projects/sllip/analysis/R/Lena_output_fig.pdf')
+df_beh_lena$NewReferenceID <- 1:18
+df_beh_lena %>% group_by(NewReferenceID) %>%
+  summarise(n=n(),
+            AWC= AWC_COUNT_norm,
+            CT = CT_COUNT_norm,
+            CV = CV_COUNT_norm) %>% 
+  gather("key", "value", - c(NewReferenceID, n)) %>%
+  ggplot(aes(x = NewReferenceID, y = value, group = key, fill = key)) + geom_col()
+dev.off()
+```
+
+## Rural versus Urban
+```{r}
+#df_beh_lena=read.csv('/Volumes/data/projects/sllip/data/demographic/SLLIP_phone_LENA.csv')
+
+#df_beh_lena$AWC_COUNT_norm=as.character(as.numeric(df_beh_lena$AWC_COUNT_norm))
+#df_beh_lena$Rural_Urban=as.character(as.numeric(df_beh_lena$Rural_Urban))
+
+t.test(AWC_COUNT_norm~Rural_Urban, data = df_beh_lena)
+t.test(CT_COUNT_norm~Rural_Urban, data = df_beh_lena)
+t.test(CV_COUNT_norm~Rural_Urban, data = df_beh_lena)
+
+myvars <- c("AWC_COUNT_norm", "CT_COUNT_norm", "CV_COUNT_norm", "Rural_Urban")
+newdata <- df_beh_lena[myvars]
+
+means<-aggregate(newdata,by=list(newdata$Rural_Urban),mean)
+library(reshape2)
+means.long<-melt(means,id.vars="Group.1")
+means.long<-means.long[-c(7:8),]
+
+pdf(file = '/Volumes/data/projects/sllip/analysis/R/Lena_output_rural_urban_fig.pdf')
+ggplot(means.long,aes(x=variable,y=value,fill=factor(Group.1)))+
+  geom_bar(stat="identity",position="dodge")+
+  scale_fill_discrete(name="Location")+
+  xlab("Quantity Type")+ylab("Normalized Quantity of Input")
+dev.off()
 ```
 
