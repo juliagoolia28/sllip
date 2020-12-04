@@ -24,6 +24,7 @@ library(ez)
 library(dplyr)
 library(arm)
 library(tidyr)
+library(tidyverse)
 ```
 
 ### Load LENA data output as dataframe
@@ -82,10 +83,11 @@ df_dem<-dplyr::bind_rows(df_dem_precovid, df_dem_covid)
 ```{r}
 df_phone=read.csv('/Volumes/data/projects/sllip/data/demographic/SLLIP_phonescreener_12-03.csv')
 names(df_phone)[names(df_phone) == "record_id"] <- "ExternalReferenceID"
-df_overall_clean$ExternalReferenceID<-as.numeric(df_overall_clean$ExternalReferenceID)
+df_overall_clean$ExternalReferenceID<-str_remove(df_overall_clean$ExternalReferenceID,"sllip_00")
+df_overall_clean$ExternalReferenceID<-str_remove(df_overall_clean$ExternalReferenceID,"sllip_0")
 df_beh_lena <- merge(df_phone,df_overall_clean,by="ExternalReferenceID")
 df_beh_lena_low <- df_beh_lena[which(df_beh_lena$free_reduced_lunch == 1),]
-#write.csv(df_beh_lena, file ="/Volumes/data/projects/sllip/data/demographic/SLLIP_phone_LENA.csv" )
+write.csv(df_beh_lena, file ="/Volumes/data/projects/sllip/data/demographic/SLLIP_phone_LENA_n18.csv" )
 ```
 
 ### Plotting preliminary data
