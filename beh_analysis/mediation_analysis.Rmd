@@ -1,0 +1,80 @@
+---
+title: "Mediation Analysis"
+author: "JM Schneider"
+date: "12/4/2020"
+output: html_document
+---
+### Import libraries
+```{r loadlib, echo=T, results='hide', message=F, warning=F}
+library(psych)
+library(readr)
+library(optimx)
+library(corrplot)
+library(reshape)
+library(reshape2)
+library(lmerTest)
+library(ggplot2)
+library(scales)
+library(ggbeeswarm)
+library(Hmisc)
+library(arm)
+library(ez)
+library(dplyr)
+library(arm)
+library(tidyr)
+```
+
+### Load LENA data output as dataframe
+
+```{r}
+setwd("/Volumes/data/projects/sllip/data/")
+df_beh <- read.csv('demographic/SLLIP_phone_LENA_n18.csv')
+quil_df <- read.csv("web-based/quil_task/quil_n9.csv")
+```
+
+```{r}
+clean_quil <- data.frame(quil_df$Participant.Private.ID)
+clean_quil$accuracy <- quil_df$Correct[quil_df$Attempt==1]
+clean_quil<-clean_quil[complete.cases(clean_quil), ]
+quil_accuracy<-aggregate(clean_quil[, "accuracy"], list(clean_quil$quil_df.Participant.Private.ID), mean)
+quil_accuracy$ExternalReferenceID <- c(12,6,23,25,29,30,27,NA)
+names(quil_accuracy)[names(quil_accuracy) == "x"] <- "accuracy"
+df_new<- merge(df_beh,quil_accuracy,by="ExternalReferenceID")
+```
+
+```{r}
+df_new$quantity <- rowMeans(subset(df_new, select = c("AWC_COUNT_norm", "CV_COUNT_norm","CT_COUNT_norm")), na.rm = TRUE)
+
+df_new$mediator=df_new$quantity
+df_new$dv=df_new$accuracy
+```
+
+## Mediation Model
+### Total Effect
+```{r}
+fit.totaleffect=lm(dv~mat_ed,df_new)
+summary(fit.totaleffect)
+```
+
+### Effect of IV on Mediator
+```{r}
+fit.mediator=lm(mediator~mat_ed,df_new)
+summary(fit.mediator)
+```
+### Effect of Mediator on DV 
+```{r}
+fit.dv=lm(dv~mat_ed+mediator,df_new)
+summary(fit.dv)
+```
+
+## Causal Mediation Model
+```{r}
+#install.packages("mediation") #uncomment this command in case you haven't installed the mediation package yet.
+library(mediation)
+```
+## Loads (and installs) the Mediation package, which takes the regression models we just estimated, combines them and estimates the whole mediation.
+```{r}
+results = mediate(fit.mediator, fit.dv, treat='mat_ed', mediator='mediator', boot=T)
+summary(results)
+```
+
