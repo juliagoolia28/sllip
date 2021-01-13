@@ -24,7 +24,7 @@ rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/dicom_conversion/bi
 ```
 -  Derivatives (fmriprep, fsl, freesurfer) are located at home/qigroup/Documents/projects/sllip/derivatives/ and will be rsynced **LATER** to home/nas/projects/sllip/data/mri/derivatives/
 ```
-rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/derivatives/ /home/nas/projects/sllip/data/mri/derivatives
+rsync -chavzP --stats /home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/ /home/nas/projects/sllip/data/mri/derivatives
 ```
 
 ## Converting dicoms to BIDS formatter nifti
