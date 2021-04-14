@@ -53,6 +53,7 @@ Freeview is a Freesurfer-based visualization toolkit. You should use our python 
 ```/home/qigroup/Documents/projects/sllip/dicom_conversion/derivatives/freesurfer/```
 
 *On either computer*
+
 3. Select the subject, check that the surface was found, and hit OK.
 
 ![](https://github.com/jlegault/Materials_for_Inspection_of_sMRI_data/blob/master/Images_for_wiki_page/python_script_find_subject.png)
