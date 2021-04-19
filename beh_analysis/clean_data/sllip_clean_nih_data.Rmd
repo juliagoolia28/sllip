@@ -1,0 +1,31 @@
+---
+title: "Clean NIH Toolbox Data"
+author: "JM Schneider"
+date: "01/19/2021"
+output: html_document
+---
+### Import libraries
+```{r loadlib, echo=T, results='hide', message=F, warning=F}
+library(dplyr)
+```
+
+### Load LENA data output as dataframe
+```{r}
+setwd("/Volumes/data/projects/sllip/data/")
+df_ast <- read.csv('assessments/nih_toolbox/sllip_all_feb_15.csv')
+```
+### Select only the columns of interest
+```{r}
+df_ast_clean <- select(df_ast, -c(DeviceID, Assessment.Name, Theta, TScore, SE, DateFinished, Column1, Column2, Column3, Column4, Column5, Language, InstrumentBreakoff, InstrumentStatus2, InstrumentRCReason,InstrumentRCReasonOther, App.Version, iPad.Version, Firmware.Version))
+```
+
+### Rename instruments
+```{r}
+df_ast_clean$Inst <- ifelse(df_ast_clean$Inst=="NIH Toolbox Picture Vocabulary Test Age 3+ v2.1", "Vocab", ifelse(df_ast_clean$Inst== "NIH Toolbox Flanker Inhibitory Control and Attention Test Ages 3-7 v2.1", "Flanker", ifelse(df_ast_clean$Inst== "NIH Toolbox Dimensional Change Card Sort Test Ages 3-7 v2.1", "EF",ifelse(df_ast_clean$Inst== "NIH Toolbox Flanker Inhibitory Control and Attention Test Age 12+ v2.1", "Flanker", ifelse(df_ast_clean$Inst== "NIH Toolbox Dimensional Change Card Sort Test Age 12+ v2.1", "EF", NA)))))
+```
+
+### Save cleaned CSV
+```{r}
+write.csv(df_ast_clean,'/Volumes/data/projects/sllip/data/assessments/nih_toolbox/clean_AST_scores_021521.csv')
+```
+

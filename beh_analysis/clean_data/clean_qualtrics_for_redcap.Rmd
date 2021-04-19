@@ -1,0 +1,107 @@
+---
+title: "sllip_organize_beh_data"
+author: "Chase Dunlap & JM Schneider"
+date: "1/28/2021"
+output: html_document
+---
+### Import libraries ( you may need to add more here as you go)
+```{r loadlib, echo=T, results='hide', message=F, warning=F}
+library(dplyr)
+library(plyr)
+library(tidyr)
+library(tibble)
+```
+
+### Load behavioral data output as dataframes 
+####(first set your working directory/the path to the data on your computer)
+####(second load the .csv file and assign it a name e.g. "df_covid")
+```{r}
+#setwd("/Users/chasedunlap/Documents/QLAB_DOCS")
+setwd("/Volumes/data/projects/sllip/analysis/R/clean_data/")
+df_qual_covid <- read.csv('SLLIP_qual_covid.csv', header = T)
+df_qual_precovid <-read.csv('SLLIP_qual_precovid.csv', header = T)
+df_qual_numeric <-read.csv('SLLIP_qual_covid_numeric.csv')
+```
+
+#Organizing Qualtrics Data
+
+### Remove columns from each dataframe that are not necessary (I include old examples below, but basically, you want to delete any column that has irrelevent information such as "UserLangauge", or "Distribution Channel". Do this for each dataframe, then ask me to check the cleaned data frame. **Be sure to name them something different**)
+```{r}
+df_qual_precovid_clean <- select(df_qual_precovid, -c(1:21))
+df_qual_covid_clean <- select(df_qual_covid, -c(1:21))
+df_qual_numeric_clean <- select(df_qual_numeric, -c(1:21))
+
+### Delete row 2 from both dataframes (this is the row that contains "ImportID")
+df_qual_precovid <- df_qual_precovid_clean[-c(2), ]
+df_qual_covid <- df_qual_covid_clean[-c(2), ]
+df_qual_numeric <- df_qual_numeric_clean[-c(2), ]
+```
+
+### Add columns from Redcap into Qualtrics data
+```{r}
+df = subset(df_qual_covid, select = -c(Q4))
+df <- df %>% separate(Q5,c("Parent First","Parent Last"))
+
+df$Q49 <- df_qual_numeric$Q49
+df$Q21 <- df_qual_numeric$Q21
+df$Q25 <- df_qual_numeric$Q25
+df = subset(df, select = -c(Q56))
+df$Q26 <- df_qual_numeric$Q26
+df<-add_column(df, absence = NA, .after = 13)
+
+df$Q33_1 <- df_qual_numeric$Q33_1
+df$Q33_2 <- df_qual_numeric$Q33_2
+df$Q33_3 <- df_qual_numeric$Q33_3
+df$Q33_4 <- df_qual_numeric$Q33_4
+df$Q33_5 <- df_qual_numeric$Q33_5
+df$Q33_6 <- df_qual_numeric$Q33_6
+df$Q33_7 <- df_qual_numeric$Q33_7
+
+df$Q35_1 <- df_qual_numeric$Q35_1
+df$Q35_2 <- df_qual_numeric$Q35_2
+df$Q35_3 <- df_qual_numeric$Q35_3
+df$Q35_4 <- df_qual_numeric$Q35_4
+df$Q35_5 <- df_qual_numeric$Q35_5
+
+df$Q51 <- df_qual_numeric$Q51
+df$Q41 <- df_qual_numeric$Q41
+
+df$Q43_1 <- df_qual_numeric$Q43_1
+df$Q43_2 <- df_qual_numeric$Q43_2
+df$Q43_3 <- df_qual_numeric$Q43_3
+df$Q43_4 <- df_qual_numeric$Q43_4
+df$Q43_5 <- df_qual_numeric$Q43_5
+df$Q43_6 <- df_qual_numeric$Q43_6
+
+df$Q53_1 <- df_qual_numeric$Q53_1
+df$Q53_2 <- df_qual_numeric$Q53_2
+df$Q53_3 <- df_qual_numeric$Q53_3
+df$Q53_4 <- df_qual_numeric$Q53_4
+df$Q53_5 <- df_qual_numeric$Q53_5
+df$Q53_6 <- df_qual_numeric$Q53_6
+
+df$Q55 <- ifelse(df_qual_covid$Q55 == "Yes",1,0)
+
+df$Q46_1 <- df_qual_numeric$Q46_1
+df$Q46_2 <- df_qual_numeric$Q46_2
+df$Q46_3 <- df_qual_numeric$Q46_3
+df$Q46_4 <- df_qual_numeric$Q46_4
+
+df$Q47 <- df_qual_numeric$Q47
+df$Q48.1 <- df_qual_numeric$Q48.1
+
+df$Q50_1 <- df_qual_numeric$Q50_1
+df$Q50_2 <- df_qual_numeric$Q50_2
+df$Q50_3 <- df_qual_numeric$Q50_3
+df$Q50_4 <- df_qual_numeric$Q50_4
+
+df$Q51_1 <- df_qual_numeric$Q51_1
+df$Q51_2 <- df_qual_numeric$Q51_2
+df$Q51_3 <- df_qual_numeric$Q51_3
+df$Q51_4 <- df_qual_numeric$Q51_4
+```
+
+```{r}
+write.csv(df,"import_redcap_data.csv")
+```
+
