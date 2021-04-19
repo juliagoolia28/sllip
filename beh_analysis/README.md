@@ -1,3 +1,6 @@
+## web_analysis
+This folder contains a script used to analyze all web-based tasks: QUILS and ASL.
+It imports the data, merges it into one file, computes an average accuracy score per participant, and statistically compares accuraccy overall to chance.
 
 ## clean_data
 This folder contains scripts used to organize behavioral data. 
