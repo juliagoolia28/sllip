@@ -17,17 +17,73 @@ knitr::opts_chunk$set(fig.width=6, fig.height=4, fig.path='Figs/', echo=TRUE, ti
 ## Library Import
 ```{r,include=FALSE,echo=FALSE,warning=FALSE}
 #Loading library
-library(ez); library(ggplot2); library(multcomp); library(nlme); library(pastecs); library(reshape)
-library(Hmisc); library (WRS2); library(lme4); library(lmerTest); library(plyr); library(splitstackshape) 
-library(naniar); library(tidyr); library(dplyr); library(memisc); library(psychReport); library(foreign); library(interactions); library(tableone); library(officer); library(magrittr); library(corrplot); library(effectsize); library(Rcmdr)
-
-julie.theme <- theme_bw() + theme(axis.line = element_line(colour = "black"), panel.grid.minor = element_blank(), panel.grid.major = element_blank(), panel.border = element_blank(), panel.background = element_blank(), legend.title= element_blank())  #custom graphics theme for ggplot2
+ library(tidyr); library(dplyr)
 ```
 
 ```{r}
-setwd("/Volumes/data/projects/sllip/data/web-based/")
-asl_df = read.csv("asl_task/asl_n10.csv")
-quil_df <- read.csv("quil_task/quil_n10.csv")
+setwd("/Volumes/data/projects/sllip/data/web-based/quil_task/")
+quil_files <- list.files(pattern="data_*")
+
+file.list <- list.files(path="/Volumes/data/projects/sllip/data/web-based/quil_task/",pattern="data*", full.names = TRUE)
+#asl_df = read.csv("asl_task/asl_n10.csv")
+#quil_df <- read.csv("quil_task/quil_n10.csv")
+```
+
+```{r}
+#initiate dataframe
+quils_df <- NULL
+# Extract relevant data and combine it
+for (file in file.list) {
+##Select only the relevant columns
+  extracted_data <-
+    read.csv(file)[c("Event.Index", "Participant.Private.ID", "Trial.Number", "Reaction.Time", "Attempt","Correct","Incorrect")]
+  quils_df <- rbind(quils_df, extracted_data)
+}
+```
+
+```{r}
+clean_quil <- data.frame(quils_df$Participant.Private.ID)
+clean_quil$accuracy <- quils_df$Correct[quils_df$Attempt==1]
+clean_quil<-clean_quil[complete.cases(clean_quil), ]
+
+clean_quil$quils_df.Participant.Private.ID <- as.numeric(clean_quil$quils_df.Participant.Private.ID)
+clean_quil$accuracy <- as.numeric(clean_quil$accuracy)
+
+quil_accuracy <- clean_quil %>%
+  group_by(quils_df.Participant.Private.ID) %>%
+  summarise(quil_accuracy = mean(accuracy, na.rm = TRUE))
+
+names(quil_accuracy)[1] <- "Gorilla.privateID"
+subject_list<- read.csv("/Volumes/data/projects/sllip/data/web-based/quil_task/quil_decoder.csv")
+quil_accuracy<-merge(subject_list,quil_accuracy, by="Gorilla.privateID")
+
+write.csv(quil_accuracy,"/Volumes/data/projects/sllip/data/web-based/quil_task/quil_accuracy.csv")
+```
+
+```{r}
+res <- t.test(quil_accuracy$quil_accuracy, mu = .25)
+res
+```
+
+```{r}
+setwd("/Volumes/data/projects/sllip/data/web-based/asl_task/")
+asl_files <- list.files(pattern="data_*")
+
+asl.file.list <- list.files(path="/Volumes/data/projects/sllip/data/web-based/asl_task/",pattern="data*", full.names = TRUE)
+
+```
+
+```{r}
+#initiate dataframe
+asl_df <- NULL
+# Extract relevant data and combine it
+for (file in asl.file.list) {
+##Select only the relevant columns
+  asl_extracted_data <-
+    read.csv(file)[c("Event.Index", "Participant.Private.ID", "Trial.Number", "Reaction.Time", "Attempt","Correct","Incorrect")]
+  asl_df <- rbind(asl_df, asl_extracted_data)
+}
+
 ```
 
 ```{r}
@@ -37,18 +93,11 @@ clean_asl<-clean_asl[complete.cases(clean_asl), ]
 asl_accuracy<-aggregate(clean_asl[, "accuracy"], list(clean_asl$asl_df.Participant.Private.ID), mean)
 ```
 
+
 ```{r}
 res <- t.test(asl_accuracy$x, mu = .50)
 res
 ```
-```{r}
-clean_quil <- data.frame(quil_df$Participant.Private.ID)
-clean_quil$accuracy <- quil_df$Correct[quil_df$Attempt==1]
-clean_quil<-clean_quil[complete.cases(clean_quil), ]
-quil_accuracy<-aggregate(clean_quil[, "accuracy"], list(clean_quil$quil_df.Participant.Private.ID), mean)
-```
 
-```{r}
-res <- t.test(quil_accuracy$x, mu = .25)
-res
-```
+
+
