@@ -58,6 +58,10 @@ An example of this command in the right hemisphere with 14 subjects:
 ```
 aparcstats2table --subjects sub-sllip001 sub-sllip002 sub-sllip004 sub-sllip005 sub-sllip006 sub-sllip007 sub-sllip008 sub-sllip009 sub-sllip010 sub-sllip011 sub-sllip012 sub-sllip013 sub-sllip014 sub-sllip015  --hemi rh --meas thickness --tablefile aparc_rh_n14_040120.txt
 ```
+An example of this command in the right hemisphere with all subjects:
+```
+aparcstats2table --subjects sub-sllip001 sub-sllip002 sub-sllip004 sub-sllip005 sub-sllip006 sub-sllip007 sub-sllip008 sub-sllip009 sub-sllip010 sub-sllip011 sub-sllip012 sub-sllip013 sub-sllip014 sub-sllip015 sub-sllip016 sub-sllip017 sub-sllip018 sub-sllip019 sub-sllip023 sub-sllip025 sub-sllip026 sub-sllip027 sub-sllip028 sub-sllip029 sub-sllip030 sub-sllip032 sub-sllip037 sub-sllip038 sub-sllip039 sub-sllip040 sub-sllip041 sub-sllip042 sub-sllip046 sub-sllip047 sub-sllip048 sub-sllip049 sub-sllip050 sub-sllip051 sub-sllip053 sub-sllip054 sub-sllip056 sub-sllip057 sub-sllip058 sub-sllip059 sub-sllip060 sub-sllip061 sub-sllip063 sub-sllip064 sub-sllip065 --hemi rh --meas thickness --tablefile aparc_area_rh.txt)
+```
 #### **Extracting gray matter volume data**
 Here are the commands you would run for extracting the gray matter volume for the right hemisphere and left hemisphere:
 ````
