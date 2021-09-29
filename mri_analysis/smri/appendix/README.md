@@ -13,6 +13,13 @@ Use the mri_convert function to alter .nii files to .mgh
 - Create .txt files for each hemisphere listing ROIs (for example, see: all_LH_ROIs.list.txt)
 - Create a list of subject IDs, based on FS directory (for example, see: subject.list.txt)
 - Modify the paths in your create_masks.sh script to mirror your own direectories
+- Check your log script. If you have this error 
+```
+ "dyld: lazy symbol binding failed: Symbol not found: ___emutls_get_address
+  Referenced from: freesurfer/bin/../lib/gcc/lib/libgomp.1.dylib
+  Expected in: /usr/lib/libSystem.B.dylib"
+  ```
+  Go to this website: https://surfer.nmr.mgh.harvard.edu/fswiki/ReleaseNotes
 
 ## Step 3. Label individual subjects.
 - Edit the labelsubject.sh script based on your hemisphere and directories
