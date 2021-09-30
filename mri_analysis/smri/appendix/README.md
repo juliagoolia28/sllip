@@ -24,3 +24,8 @@ Use the mri_convert function to alter .nii files to .mgh
 ## Step 3. Label individual subjects.
 - Edit the labelsubject.sh script based on your hemisphere and directories
 - Run this for each hemisphere
+
+## Step 4. Extract GM measures. 
+- Edit the extractGM.sh script based on your hemisphere and directories
+- Run this for each hemisphere
+- Your .log files contain the metadata with GM measures
