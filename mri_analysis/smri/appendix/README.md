@@ -13,6 +13,7 @@ Use the mri_convert function to alter .nii files to .mgh
 - Create .txt files for each hemisphere listing ROIs (for example, see: all_LH_ROIs.list.txt)
 - Create a list of subject IDs, based on FS directory (for example, see: subject.list.txt)
 - Modify the paths in your create_masks.sh script to mirror your own direectories
+- All label files will be saved to the fsaverage directory "label"
 - Check your log script. If you have this error 
 ```
  "dyld: lazy symbol binding failed: Symbol not found: ___emutls_get_address
